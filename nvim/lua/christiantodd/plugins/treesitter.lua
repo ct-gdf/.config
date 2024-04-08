@@ -23,6 +23,8 @@ return {
 					"typescript",
 					"vim",
 					"yaml",
+					"comment",
+					"sql",
 				},
 
 				-- Install parsers synchronously (only applied to `ensure_installed`)

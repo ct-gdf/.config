@@ -6,7 +6,6 @@ return {
 		local format_on_save = {
 			lsp_fallback = true,
 			async = false,
-			timeout_ms = 600,
 		}
 		conform.setup({
 			formatters_by_ft = {
@@ -19,7 +18,9 @@ return {
 				json = { "prettier" },
 				yaml = { "prettier" },
 				markdown = { "prettier" },
+				svg = { "prettier" },
 				lua = { "stylua" },
+				bash = { "shfmt" },
 			},
 			format_on_save = format_on_save,
 		})

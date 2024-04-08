@@ -151,5 +151,24 @@ return {
 				},
 			},
 		})
+
+		lspconfig["tailwindcss"].setup({
+			settings = {
+				tailwindCSS = {
+					experimental = {
+						classRegex = {
+							{ "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
+							{ "cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" },
+						},
+					},
+				},
+			},
+		})
+
+		-- C#
+		lspconfig["omnisharp"].setup({
+			on_attach = on_attach,
+			capabilities = capabilities,
+		})
 	end,
 }

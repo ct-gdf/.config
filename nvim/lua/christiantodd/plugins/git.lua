@@ -1,4 +1,4 @@
 return {
-	"stevearc/dressing.nvim",
+	"tpope/vim-fugitive",
 	event = { "BufReadPre", "BufNewFile" },
 }

@@ -1,6 +1,12 @@
 return {
 	"nvim-lualine/lualine.nvim",
-	depedencies = { "nvim-tree/nvim-web-devicons" },
-	event = "BufEnter",
-	config = true,
+	dependencies = { "nvim-tree/nvim-web-devicons" },
+	event = { "BufReadPre", "BufNewFile" },
+	opts = {
+		lualine_x = {},
+		lualine_c = {
+			-- Display the full path of the file in the buffer
+			{ "filename", path = 1 },
+		},
+	},
 }
