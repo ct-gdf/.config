@@ -22,6 +22,10 @@ opt.undofile = true
 
 opt.hlsearch = false
 opt.incsearch = true
+
+opt.splitbelow = true
+opt.splitright = true
+
 opt.termguicolors = true
 opt.scrolloff = 8
 opt.signcolumn = "yes"
@@ -29,6 +33,7 @@ opt.isfname:append("@-@")
 
 opt.updatetime = 50
 opt.colorcolumn = "80"
+opt.cursorline = true
 -- Sync copy with system clipboard
 opt.clipboard = "unnamed,unnamedplus"
 

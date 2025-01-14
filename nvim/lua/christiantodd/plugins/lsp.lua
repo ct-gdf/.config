@@ -18,7 +18,11 @@ return {
 		local lspconfig = require("lspconfig")
 		local keymap = vim.keymap
 		local opts = { noremap = true, silent = true }
-		local capabilities = require("cmp_nvim_lsp").default_capabilities()
+		local capabilities = vim.tbl_deep_extend(
+			"force",
+			vim.lsp.protocol.make_client_capabilities(),
+			require("cmp_nvim_lsp").default_capabilities()
+		)
 		require("mason").setup({})
 
 		local on_attach = function(client, bufnr)
@@ -51,12 +55,6 @@ return {
 			opts.desc = "Show line diagnostics"
 			keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts) -- show diagnostics for line
 
-			opts.desc = "Go to previous diagnostic"
-			keymap.set("n", "[d", vim.diagnostic.goto_prev, opts) -- jump to previous diagnostic in buffer
-
-			opts.desc = "Go to next diagnostic"
-			keymap.set("n", "]d", vim.diagnostic.goto_next, opts) -- jump to next diagnostic in buffer
-
 			opts.desc = "Show documentation for what is under cursor"
 			keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
 
@@ -69,14 +67,14 @@ return {
 
 		require("mason-lspconfig").setup({
 			ensure_installed = {
-				"tsserver",
+				"ts_ls",
 				"html",
 				"cssls",
 				"tailwindcss",
 				"lua_ls",
 				"emmet_ls",
 			},
-			automatic_installation = true,
+			automatic_installation = { exclude = "ocamllsp" },
 			handlers = {
 				function(server_name)
 					require("lspconfig")[server_name].setup({})
@@ -88,8 +86,6 @@ return {
 			virtual_text = true,
 		})
 
-		-- Change the Diagnostic symbols in the sign column (gutter)
-		-- (not in youtube nvim video)
 		local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
 		for type, icon in pairs(signs) do
 			local hl = "DiagnosticSign" .. type
@@ -103,7 +99,7 @@ return {
 		})
 
 		-- configure typescript server with plugin
-		lspconfig["tsserver"].setup({
+		lspconfig["ts_ls"].setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
 			settings = {
@@ -159,6 +155,8 @@ return {
 						classRegex = {
 							{ "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
 							{ "cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" },
+							-- https://www.tailwind-variants.org/docs/getting-started#intellisense-setup-optional
+							{ "tv\\((([^()]*|\\([^()]*\\))*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
 						},
 					},
 				},
@@ -167,6 +165,27 @@ return {
 
 		-- C#
 		lspconfig["omnisharp"].setup({
+			on_attach = on_attach,
+			capabilities = capabilities,
+		})
+
+		lspconfig["ocamllsp"].setup({
+			cmd = { "ocamllsp" },
+			filetypes = { "ocaml", "ocaml.menhir", "ocaml.interface", "reason", "dune" },
+			root_dir = lspconfig.util.root_pattern("*.opam", "dune-prooject", "dune-workspace", ".git"),
+			on_attach = on_attach,
+			capabilities = capabilities,
+			settings = {
+				codelens = { enabled = true },
+			},
+		})
+
+		lspconfig["gleam"].setup({
+			on_attach = on_attach,
+			capabilities = capabilities,
+		})
+
+		lspconfig["cssmodules-language-server"].setup({
 			on_attach = on_attach,
 			capabilities = capabilities,
 		})
