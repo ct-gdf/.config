@@ -47,3 +47,5 @@ vim.keymap.set(
 	":%bd|e#|bd#<CR>|'\"",
 	{ desc = "[C]leanup [A]all [B]uffers and reopen current buffer. Cursor position is retained with a mark" }
 )
+
+vim.keymap.set("n", "<leader>pk", "viw:s/\\([A-Z]\\)/\\-\\L\\1/g<CR>:s/^\\--%//<CR>")

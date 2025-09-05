@@ -1,12 +1,11 @@
 return {
 	"nvim-telescope/telescope.nvim",
-	tag = "0.1.6",
+	branch = "0.1.x",
 	event = { "VeryLazy" },
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 		"nvim-telescope/telescope-ui-select.nvim",
-		"nvim-tree/nvim-web-devicons",
 	},
 	config = function()
 		local telescope = require("telescope")
@@ -14,6 +13,16 @@ return {
 		local trouble = require("trouble.sources.telescope")
 
 		telescope.setup({
+			pickers = {
+				find_files = {
+					hidden = true,
+				},
+			},
+			extensions = {
+				["ui-select"] = {
+					require("telescope.themes").get_dropdown(),
+				},
+			},
 			defaults = {
 				mappings = {
 					i = {
@@ -25,11 +34,16 @@ return {
 						["<C-tt>"] = trouble.open,
 					},
 				},
+				file_ignore_patterns = {
+					"node_modules",
+					".git",
+				},
 			},
 		})
 
 		telescope.load_extension("fzf")
 		telescope.load_extension("harpoon")
+		telescope.load_extension("ui-select")
 
 		vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Fuzzy find files in cwd" })
 		vim.keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Fuzzy find recent files" })

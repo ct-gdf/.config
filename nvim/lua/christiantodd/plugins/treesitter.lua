@@ -10,6 +10,7 @@ return {
 			require("nvim-treesitter.configs").setup({
 				ensure_installed = {
 					"bash",
+					"comment",
 					"css",
 					"dockerfile",
 					"html",
@@ -17,14 +18,11 @@ return {
 					"json",
 					"lua",
 					"markdown",
-					"ocaml",
-					"ocaml_interface",
 					"query",
+					"sql",
 					"typescript",
 					"vim",
 					"yaml",
-					"comment",
-					"sql",
 				},
 
 				-- Install parsers synchronously (only applied to `ensure_installed`)

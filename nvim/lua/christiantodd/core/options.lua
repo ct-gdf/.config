@@ -45,3 +45,6 @@ opt.guicursor = {
 	"a:blickwait600-blinkoff300-blinkon200A",
 	"sm:block-blinkwait175-blinkoff150-blinkon175",
 }
+
+-- Borders on floating windows
+-- opt.winborder = "rounded"
