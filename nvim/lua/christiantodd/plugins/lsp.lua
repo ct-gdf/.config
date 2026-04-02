@@ -16,7 +16,15 @@ return {
 		version = "*",
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
-			{ "mason-org/mason.nvim", opts = {} },
+			{
+				"mason-org/mason.nvim",
+				opts = {
+					registries = {
+						"github:mason-org/mason-registry",
+						"github:Crashdummyy/mason-registry",
+					},
+				},
+			},
 			"mason-org/mason-lspconfig.nvim",
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
 			{
@@ -245,7 +253,7 @@ return {
 				others = {
 					ocamllsp = {
 						-- use local switch's version of ocamllsp instead of using mason
-						cmd = { "dune", "exec", "ocamllsp" },
+						cmd = { "opam", "exec", "ocamllsp" },
 						manual_install = true,
 						settings = {
 							codelens = { enable = true },
@@ -259,6 +267,9 @@ return {
 						-- filetypes = { "gleam" },
 						manual_install = true,
 						-- root_dir = lspconfig.util.root_pattern("gleam.toml", ".git"),
+					},
+					oxlint = {
+						cmd = { "pnpm", "exec", "oxlint", "--lsp" },
 					},
 				},
 			}

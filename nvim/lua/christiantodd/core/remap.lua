@@ -49,3 +49,8 @@ vim.keymap.set(
 )
 
 vim.keymap.set("n", "<leader>pk", "viw:s/\\([A-Z]\\)/\\-\\L\\1/g<CR>:s/^\\--%//<CR>")
+
+vim.keymap.set("n", "<leader>fp", function()
+	vim.fn.setreg("+", vim.fn.expand("%:p"))
+	vim.notify("File path copied to clipboard!", vim.log.levels.INFO)
+end, { noremap = true, silent = true, desc = "Copy current file path" })

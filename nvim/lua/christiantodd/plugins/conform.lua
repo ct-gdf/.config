@@ -4,18 +4,19 @@ return {
 	config = function()
 		local conform = require("conform")
 		local slow_format_filetypes = {}
+		local shared = { "oxfmt", "prettier" }
 		conform.setup({
 			formatters_by_ft = {
-				javascript = { "prettier" },
-				typescript = { "prettier" },
-				javascriptreact = { "prettier" },
-				typescriptreact = { "prettier" },
-				html = { "prettier" },
-				css = { "prettier" },
-				json = { "prettier" },
+				javascript = shared,
+				typescript = shared,
+				javascriptreact = shared,
+				typescriptreact = shared,
+				html = shared,
+				css = shared,
+				json = shared,
 				yaml = { "prettier" },
 				markdown = { "prettier" },
-				svg = { "prettier" },
+				svg = shared,
 				lua = { "stylua" },
 				sh = { "shfmt" },
 				sql = { "sql-formatter" },
