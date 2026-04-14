@@ -270,6 +270,7 @@ return {
 					},
 					oxlint = {
 						cmd = { "pnpm", "exec", "oxlint", "--lsp" },
+						root_markers = { ".oxlintrc.json", ".oxlintrc.jsonc", "oxlint.config.ts" },
 					},
 				},
 			}

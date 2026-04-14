@@ -4,7 +4,7 @@ return {
 	config = function()
 		local conform = require("conform")
 		local slow_format_filetypes = {}
-		local shared = { "oxfmt", "prettier" }
+		local shared = { "oxfmt", "prettier", stop_after_first = true }
 		conform.setup({
 			formatters_by_ft = {
 				javascript = shared,
