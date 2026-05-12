@@ -95,7 +95,7 @@ return {
 						vim.lsp.buf.signature_help({ border = "rounded" })
 					end, "Show function signature", "i")
 
-					map("<leader>rs", ":LspRestart<CR>", "Restart LSP")
+					map("<leader>rs", ":lsp restart<CR>", "Restart LSP")
 				end,
 			})
 
