@@ -268,10 +268,10 @@ return {
 						manual_install = true,
 						-- root_dir = lspconfig.util.root_pattern("gleam.toml", ".git"),
 					},
-					oxlint = {
-						cmd = { "pnpm", "exec", "oxlint", "--lsp" },
-						root_markers = { ".oxlintrc.json", ".oxlintrc.jsonc", "oxlint.config.ts" },
-					},
+					-- oxlint = {
+					-- 	cmd = { "pnpm", "exec", "oxlint", "--lsp" },
+					-- 	root_markers = { ".oxlintrc.json", ".oxlintrc.jsonc", "oxlint.config.ts" },
+					-- },
 				},
 			}
 
