@@ -40,17 +40,26 @@ vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right win
 vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
+vim.keymap.set("n", "<leader>cab", function()
+	local before = #vim.fn.getbufinfo({ buflisted = 1 })
+	vim.cmd("%bd|e#|bd#")
+	local closed = before - #vim.fn.getbufinfo({ buflisted = 1 })
+	vim.notify(("Closed %d buffer%s"):format(closed, closed == 1 and "" or "s"), vim.log.levels.INFO)
+end, { desc = "[C]leanup [A]ll [B]uffers and reopen current buffer. Cursor position is retained with a mark" })
+
 vim.keymap.set(
 	"n",
-	"<leader>cab",
-	-- Explain:
-	":%bd|e#|bd#<CR>|'\"",
-	{ desc = "[C]leanup [A]all [B]uffers and reopen current buffer. Cursor position is retained with a mark" }
+	"<leader>pk",
+	"viw:s/\\([A-Z]\\)/\\-\\L\\1/g<CR>:s/^\\--%//<CR>",
+	{ desc = "Convert word under cursor from camelCase/PascalCase to kebab-case" }
 )
 
-vim.keymap.set("n", "<leader>pk", "viw:s/\\([A-Z]\\)/\\-\\L\\1/g<CR>:s/^\\--%//<CR>")
-
-vim.keymap.set("n", "<leader>fp", function()
+vim.keymap.set("n", "<leader>cpa", function()
 	vim.fn.setreg("+", vim.fn.expand("%:p"))
 	vim.notify("File path copied to clipboard!", vim.log.levels.INFO)
-end, { noremap = true, silent = true, desc = "Copy current file path" })
+end, { noremap = true, silent = true, desc = "[C]opy current file [P]ath [A]bsolute" })
+
+vim.keymap.set("n", "<leader>cpr", function()
+	vim.fn.setreg("+", vim.fn.expand("%:."))
+	vim.notify("Relative file path copied to clipboard!", vim.log.levels.INFO)
+end, { noremap = true, silent = true, desc = "[C]opy current file [P]ath [R]elative" })
