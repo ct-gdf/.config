@@ -15,7 +15,7 @@ return {
 				css = shared,
 				json = shared,
 				yaml = { "prettier" },
-				markdown = { "prettier" },
+				markdown = shared,
 				svg = shared,
 				lua = { "stylua" },
 				sh = { "shfmt" },
