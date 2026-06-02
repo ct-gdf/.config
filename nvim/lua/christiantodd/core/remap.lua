@@ -63,3 +63,5 @@ vim.keymap.set("n", "<leader>cpr", function()
 	vim.fn.setreg("+", vim.fn.expand("%:."))
 	vim.notify("Relative file path copied to clipboard!", vim.log.levels.INFO)
 end, { noremap = true, silent = true, desc = "[C]opy current file [P]ath [R]elative" })
+
+vim.keymap.set("n", "<leader>W", "<cmd>noautocmd w<CR>", { desc = "[W]rite without formatting" })
