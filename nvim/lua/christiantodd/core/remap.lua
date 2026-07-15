@@ -65,3 +65,22 @@ vim.keymap.set("n", "<leader>cpr", function()
 end, { noremap = true, silent = true, desc = "[C]opy current file [P]ath [R]elative" })
 
 vim.keymap.set("n", "<leader>W", "<cmd>noautocmd w<CR>", { desc = "[W]rite without formatting" })
+
+vim.keymap.set("n", "<leader>gz", function()
+	local filepath
+	if vim.bo.filetype == "oil" then
+		local oil = require("oil")
+		local entry = oil.get_cursor_entry()
+		local dir = oil.get_current_dir()
+		if entry and dir then
+			filepath = dir .. entry.name
+		else
+			filepath = dir
+		end
+	else
+		filepath = vim.fn.expand("%:p")
+	end
+	if filepath and filepath ~= "" then
+		vim.fn.jobstart({ "zed", filepath }, { detach = true })
+	end
+end, { desc = "Open file in [Z]ed" })
