@@ -20,6 +20,7 @@ return {
 				lua = { "stylua" },
 				sh = { "shfmt" },
 				sql = { "sql-formatter" },
+				cs = { "csharpier" },
 			},
 			format_on_save = function(bufnr)
 				if slow_format_filetypes[vim.bo[bufnr].filetype] then
