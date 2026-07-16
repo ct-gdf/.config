@@ -249,6 +249,27 @@ return {
 					},
 					astro = {},
 					omnisharp = {},
+					css_variables = {
+						settings = {
+							cssVariables = {
+								blacklistFolders = {
+									"**/.cache",
+									"**/.git",
+									"**/.hg",
+									"**/.svn",
+									"**/.next",
+									"**/.turbo",
+									"**/.wireit",
+									"**/bower_components",
+									"**/node_modules",
+									"**/dist",
+									"**/build",
+									"**/tests",
+									"**/tmp",
+								},
+							},
+						},
+					},
 				},
 				others = {
 					ocamllsp = {
